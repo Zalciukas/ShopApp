@@ -1,0 +1,40 @@
+package com.example.shopapp.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotificationManager {
+    private static NotificationManager instance;
+    private List<String> notifications;
+
+    private NotificationManager() {
+        notifications = new ArrayList<>();
+    }
+
+    public static NotificationManager getInstance() {
+        if (instance == null) {
+            instance = new NotificationManager();
+        }
+        return instance;
+    }
+
+    public void addNotification(String notification) {
+        notifications.add(notification);
+    }
+
+    public List<String> getNotifications() {
+        return new ArrayList<>(notifications); // Return a copy to prevent modification
+    }
+
+    public String getNotificationsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String notification : notifications) {
+            sb.append(notification);
+        }
+        return sb.toString();
+    }
+
+    public void clearNotifications() {
+        notifications.clear();
+    }
+}
