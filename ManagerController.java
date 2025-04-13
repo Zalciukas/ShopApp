@@ -45,12 +45,16 @@ public class ManagerController implements Initializable, InventoryObserver {
 
     private Inventory inventory;
     private ObservableList<Product> productList;
+    private NotificationManager notificationManager;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize inventory (Singleton) and register as observer
         inventory = Inventory.getInstance();
         inventory.addObserver(this);
+
+        // Initialize notification manager
+        notificationManager = NotificationManager.getInstance();
 
         // Initialize observable list
         productList = FXCollections.observableArrayList();
@@ -73,6 +77,13 @@ public class ManagerController implements Initializable, InventoryObserver {
 
         // Update total sales label
         updateTotalSales();
+
+        // Load existing notifications
+        loadNotifications();
+    }
+
+    private void loadNotifications() {
+        notificationArea.setText(notificationManager.getNotificationsAsString());
     }
 
     private void loadProducts() {
@@ -282,6 +293,12 @@ public class ManagerController implements Initializable, InventoryObserver {
         }
     }
 
+    @FXML
+    private void onClearNotificationsClicked() {
+        notificationManager.clearNotifications();
+        notificationArea.clear();
+    }
+
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -306,6 +323,9 @@ public class ManagerController implements Initializable, InventoryObserver {
             notification = "Inventory update: " + product.getName() + "\n";
         }
 
+        // Add to the notification manager
+        notificationManager.addNotification(notification);
+
         // Using Platform.runLater to update UI from a different thread
         javafx.application.Platform.runLater(() -> {
             notificationArea.appendText(notification);
@@ -320,6 +340,9 @@ public class ManagerController implements Initializable, InventoryObserver {
 
     @FXML
     private Button logoutButton;
+
+    @FXML
+    private Button clearNotificationsButton;
 
     @FXML
     private void onLogoutButtonClicked(ActionEvent event) {
