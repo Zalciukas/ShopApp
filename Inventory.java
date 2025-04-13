@@ -118,6 +118,21 @@ public class Inventory {
     }
 
     public void notifyObservers(Product product, String eventType) {
+        // Also add to NotificationManager for persistence
+        if (eventType.equals("PURCHASE")) {
+            String notification = "Product purchased: " + product.getName() +
+                    " - $" + product.getPrice() +
+                    " (" + product.getCategory() + ")\n";
+            NotificationManager.getInstance().addNotification(notification);
+        }
+        else if (eventType.equals("NEW_PRODUCT")) {
+            String notification = "New product added: " + product.getName() +
+                    " - $" + product.getPrice() +
+                    " (" + product.getCategory() + ")\n";
+            NotificationManager.getInstance().addNotification(notification);
+        }
+
+        // Notify all observers
         for (InventoryObserver observer : observers) {
             observer.update(product, eventType);
         }
