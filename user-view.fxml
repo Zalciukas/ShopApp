@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.shopapp.UserController"
+            prefHeight="600.0" prefWidth="800.0">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="10">
+            <Label text="Shop Application - Customer View" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Filter by Category:"/>
+                <ComboBox fx:id="categoryComboBox" onAction="#onCategoryChanged"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" prefWidth="350">
+            <Label text="Available Products" style="-fx-font-weight: bold"/>
+            <TableView fx:id="productTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Product" prefWidth="150"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="80"/>
+                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="60"/>
+                    <TableColumn fx:id="quantityColumn" text="In Stock" prefWidth="60"/>
+                </columns>
+            </TableView>
+            <Button text="Add to Cart" onAction="#onAddToCartClicked"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" prefWidth="300">
+            <Label text="Shopping Cart" style="-fx-font-weight: bold"/>
+            <TableView fx:id="cartTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="cartProductColumn" text="Product" prefWidth="150"/>
+                    <TableColumn fx:id="cartQuantityColumn" text="Quantity" prefWidth="70"/>
+                    <TableColumn fx:id="cartPriceColumn" text="Total Price" prefWidth="80"/>
+                </columns>
+            </TableView>
+            <Button text="Remove from Cart" onAction="#onRemoveFromCartClicked"/>
+
+            <VBox spacing="5" style="-fx-padding: 10; -fx-border-color: lightgray; -fx-border-radius: 5;">
+                <Label text="Additional Services" style="-fx-font-weight: bold"/>
+                <CheckBox fx:id="giftWrappingCheckBox" text="Gift Wrapping ($5.00)" onAction="#onDecoratorChanged"/>
+                <CheckBox fx:id="expressShippingCheckBox" text="Express Shipping ($10.00)" onAction="#onDecoratorChanged"/>
+                <CheckBox fx:id="insuranceCheckBox" text="Insurance ($7.50)" onAction="#onDecoratorChanged"/>
+            </VBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Payment Method:"/>
+                <ComboBox fx:id="paymentMethodComboBox"/>
+            </HBox>
+
+            <Label fx:id="totalLabel" text="Total: $0.00" style="-fx-font-weight: bold"/>
+            <Button text="Process Payment" onAction="#onProcessPayment"/>
+            <Button fx:id="logoutButton" text="Log Out" onAction="#onLogoutButtonClicked" />
+        </VBox>
+    </center>
+
+</BorderPane>

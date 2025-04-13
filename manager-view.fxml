@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.shopapp.ManagerController"
+            prefHeight="700.0" prefWidth="900.0">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="10">
+            <Label text="Shop Application - Manager View" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Filter by Category:"/>
+                <ComboBox fx:id="categoryComboBox" onAction="#onCategoryChanged"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="totalSalesLabel" text="Total Sales: $0.00" style="-fx-font-weight: bold"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <Label text="Inventory Management" style="-fx-font-weight: bold"/>
+            <TableView fx:id="productTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="80"/>
+                    <TableColumn fx:id="nameColumn" text="Product" prefWidth="200"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="120"/>
+                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="80"/>
+                    <TableColumn fx:id="quantityColumn" text="In Stock" prefWidth="80"/>
+                </columns>
+            </TableView>
+            <HBox spacing="10">
+                <Button text="Add New Product" onAction="#onAddProductClicked"/>
+                <Button text="Update Quantity" onAction="#onUpdateProductClicked"/>
+                <Button text="Remove Product" onAction="#onRemoveProductClicked"/>
+                <Button fx:id="logoutButton" text="Log Out" onAction="#onLogoutButtonClicked" />
+            </HBox>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox spacing="10" prefWidth="200">
+            <Label text="Notifications" style="-fx-font-weight: bold"/>
+            <TextArea fx:id="notificationArea" VBox.vgrow="ALWAYS" editable="false" wrapText="true"/>
+        </VBox>
+    </right>
+</BorderPane>
