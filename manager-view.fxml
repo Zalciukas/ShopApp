@@ -49,6 +49,7 @@
         <VBox spacing="10" prefWidth="200">
             <Label text="Notifications" style="-fx-font-weight: bold"/>
             <TextArea fx:id="notificationArea" VBox.vgrow="ALWAYS" editable="false" wrapText="true"/>
+            <Button fx:id="clearNotificationsButton" text="Clear Notifications" onAction="#onClearNotificationsClicked" />
         </VBox>
     </right>
 </BorderPane>
